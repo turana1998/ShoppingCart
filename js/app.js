@@ -1,9 +1,26 @@
-let xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        let data = JSON.parse(this.responseText)
-        console.log(data)
-    }
-};
-xhttp.open("GET", "data/products.json", true);
-xhttp.send();
+$(function () {
+
+
+    var people = [];
+
+    $.getJSON('data/products.json', function (data) {
+        $.each(data, function (i, f) {
+            var card = `<div class="col-12 col-sm-6 col-lg-4">
+                <div class="card" style="width: 18rem;">
+        <img class="w-100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_SJUD9oHXm-HxpI1TGVqHFvu6AS4Uc2XcLQ&usqp=CAU"
+            class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">${f.name}</h5>
+            <p class="card-text">${f.detail}</p>
+            <p class="card-text">${f.price}</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+</div>`;
+            $(card).appendTo(".product .row");
+
+        });
+
+    });
+
+});
